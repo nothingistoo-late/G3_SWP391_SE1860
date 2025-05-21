@@ -13,10 +13,8 @@ namespace BusinessObjects
         public int Quantity { get; set; }
         [MaxLength(200)]
         public string DispenseReason { get; set; }
-        [MaxLength(450)]
-        public string AdministeredBy { get; set; }
-        public ApplicationUser AdministeredUser { get; set; }
+        public Guid AdministeredBy { get; set; }
+        public User AdministeredUser { get; set; }
         public DateTime AdministeredAt { get; set; }
     }
-
 }

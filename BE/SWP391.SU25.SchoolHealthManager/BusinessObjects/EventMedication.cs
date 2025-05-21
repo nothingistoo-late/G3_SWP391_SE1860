@@ -12,5 +12,4 @@ namespace BusinessObjects
         public MedicationLot MedicationLot { get; set; }
         public int Quantity { get; set; }
     }
-
 }
