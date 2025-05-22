@@ -42,7 +42,7 @@ namespace Services.Implementations
                 new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
                 new Claim("FirstName", user.FirstName ?? string.Empty),
                 new Claim("LastName", user.LastName ?? string.Empty),
-                new Claim("Gender", user.Gender.ToString()), 
+                new Claim("Gender", user.Gender ?? string.Empty),
                 new Claim("securityStamp", await _userManager.GetSecurityStampAsync(user))
             };
 

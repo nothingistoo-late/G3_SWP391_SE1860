@@ -8,14 +8,10 @@ namespace WebAPI.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IExternalAuthService _externalAuthService;
-        private readonly SignInManager<User> _signInManager;
 
-        public AuthController(IUserService userService, IExternalAuthService externalAuthService,  SignInManager<User> signInManager)
+        public AuthController(IUserService userService, SignInManager<User> signInManager)
         {
             _userService = userService;
-            _externalAuthService = externalAuthService;
-            _signInManager = signInManager;
         }
 
         [HttpPost("register")]
