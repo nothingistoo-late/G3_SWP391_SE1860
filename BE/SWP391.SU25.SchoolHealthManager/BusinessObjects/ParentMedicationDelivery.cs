@@ -12,9 +12,9 @@ namespace BusinessObjects
         public DateTime DeliveredAt { get; set; }
         public Guid DeliveredBy { get; set; }
         public Parent Parent { get; set; }
-        [MaxLength(450)]
-        public string ReceivedBy { get; set; }
+        public Guid ReceivedBy { get; set; }
         public User ReceivedUser { get; set; }
         public string Notes { get; set; }
+        public string Status { get; set; }
     }
 }

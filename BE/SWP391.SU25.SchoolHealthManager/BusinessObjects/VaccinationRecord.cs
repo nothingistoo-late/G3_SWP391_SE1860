@@ -15,14 +15,11 @@ namespace BusinessObjects
         public Guid VaccineLotId { get; set; }
         public MedicationLot VaccineLot { get; set; }
         public DateTime AdministeredDate { get; set; }
-        public string Source { get; set; }
         public bool ConsentSigned { get; set; }
-        [MaxLength(450)]
-        public string VaccinatedBy { get; set; }
+        public Guid VaccinatedBy { get; set; }
         public User VaccinatedUser { get; set; }
         public DateTime VaccinatedAt { get; set; }
         public bool ReactionFollowup24h { get; set; }
         public bool ReactionFollowup72h { get; set; }
     }
-
 }
