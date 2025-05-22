@@ -6,6 +6,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
       .AddInfrastructure(builder.Configuration)
       .AddSwaggerServices();
+if (builder.Environment.IsDevelopment())
+{
+    builder.Configuration.AddUserSecrets<Program>();
+}
 
 var app = builder.Build();
 
