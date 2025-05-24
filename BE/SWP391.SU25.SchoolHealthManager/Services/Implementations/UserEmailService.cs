@@ -88,10 +88,8 @@ namespace Services.Implementations
                 throw new ArgumentException("Token không được để trống hoặc null.", nameof(token));
             if (string.IsNullOrWhiteSpace(resetPasswordUri))
                 throw new ArgumentException("ResetPasswordUri không được để trống hoặc null.", nameof(resetPasswordUri));
-
-            var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
-            var resetLink = $"{resetPasswordUri}?email={Uri.EscapeDataString(email)}&token={encodedToken}";
-
+        
+            var resetLink = $"{resetPasswordUri}?email={Uri.EscapeDataString(email)}&token={token}";
             var subject = "Đặt lại mật khẩu";
             var message = $"Nhấp <a href=\"{resetLink}\">vào đây</a> để đặt lại mật khẩu.";
             await QueueEmailAsync(email, subject, message);

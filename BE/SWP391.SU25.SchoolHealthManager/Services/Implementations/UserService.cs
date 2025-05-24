@@ -149,7 +149,9 @@ namespace Services.Implementations
                 return genericResponse;
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            _logger.LogDebug("Raw token: {Token}", token);
             var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
+            _logger.LogDebug("Encoded token: {encodedToken}", encodedToken);
 
             await _userEmailService.SendPasswordResetEmailAsync(request.Email, encodedToken, _resetPasswordUri);
             return genericResponse;
@@ -163,14 +165,18 @@ namespace Services.Implementations
             var user = await _userManager.FindByEmailAsync(request.Email);
             if (user == null)
                 return ApiResult<string>.Failure("Invalid request");
+            _logger.LogDebug("Incoming token (request): {RequestToken}", request.Token);
 
             string token;
             try
             {
                 token = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(request.Token));
+                _logger.LogDebug("Decoded token: {Decoded}", token);
+
             }
-            catch
+            catch (Exception ex)
             {
+                _logger.LogError(ex, "Lỗi decode token");
                 return ApiResult<string>.Failure("Invalid token");
             }
 
