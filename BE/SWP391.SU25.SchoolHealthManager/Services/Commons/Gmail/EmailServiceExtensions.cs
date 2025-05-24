@@ -15,19 +15,20 @@ namespace Services.Commons.Gmail
             services.AddHostedService<EmailBackgroundService>();
             services.AddHostedService<EmailReminderService>();
 
-            // Configure Quartz  
             services.AddQuartz(q =>
             {
                 q.UseMicrosoftDependencyInjectionJobFactory();
 
                 var jobKey = new JobKey("SendEmailJob");
                 q.AddJob<SendEmailJob>(opts => opts.WithIdentity(jobKey));
-                q.AddTrigger(opts => opts
-                    .ForJob(jobKey)
-                    .WithIdentity("SendEmailJob-trigger")
-                    .StartNow()
-                    .WithSimpleSchedule(x => x.WithIntervalInMinutes(5).RepeatForever()));
+
+                 q.AddTrigger(opts => opts
+                     .ForJob(jobKey)
+                     .WithIdentity("SendEmailJob-trigger")
+                     .StartNow()
+                     .WithSimpleSchedule(x => x.WithIntervalInMinutes(5).RepeatForever()));
             });
+
 
 
             services.AddQuartzHostedService(options =>
